@@ -5,6 +5,7 @@ import com.realtime.seatspringbootbackend.common.entity.BaseEntity;
 import com.realtime.seatspringbootbackend.common.utils.EnumUtils;
 import com.realtime.seatspringbootbackend.src.store.domain.StoreEntity;
 import com.realtime.seatspringbootbackend.src.store.dto.request.StoreCreateRequestDto;
+import com.realtime.seatspringbootbackend.src.store.dto.request.StoreMemoCreateDto;
 import com.realtime.seatspringbootbackend.src.store.dto.request.StoreUpdateRequestDto;
 import com.realtime.seatspringbootbackend.src.store.exception.StoreNotFoundException;
 import com.realtime.seatspringbootbackend.src.store.repository.StoreRepository;
@@ -74,5 +75,16 @@ public class StoreService {
                         .orElseThrow(
                                 () -> new StoreNotFoundException(ResponseCode.STORE_NOT_FOUND));
         storeEntity.setState(BaseEntity.State.INACTIVE);
+    }
+
+    @Transactional
+    public void updateMemo(Long id, StoreMemoCreateDto storeMemoCreateDto)
+            throws StoreNotFoundException {
+        StoreEntity storeEntity =
+                storeRepository
+                        .findById(id)
+                        .orElseThrow(
+                                () -> new StoreNotFoundException(ResponseCode.STORE_NOT_FOUND));
+        storeEntity.setMemo(storeMemoCreateDto.getMemo());
     }
 }

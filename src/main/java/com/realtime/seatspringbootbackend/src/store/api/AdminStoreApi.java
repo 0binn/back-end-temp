@@ -4,6 +4,7 @@ import com.realtime.seatspringbootbackend.common.code.ResponseCode;
 import com.realtime.seatspringbootbackend.common.exceptions.BaseException;
 import com.realtime.seatspringbootbackend.src.store.domain.StoreEntity;
 import com.realtime.seatspringbootbackend.src.store.dto.request.StoreCreateRequestDto;
+import com.realtime.seatspringbootbackend.src.store.dto.request.StoreMemoCreateDto;
 import com.realtime.seatspringbootbackend.src.store.dto.request.StoreUpdateRequestDto;
 import com.realtime.seatspringbootbackend.src.store.exception.StoreNotFoundException;
 import com.realtime.seatspringbootbackend.src.store.service.StoreService;
@@ -60,6 +61,18 @@ public class AdminStoreApi {
     public void deleteStore(@PathVariable Long id) {
         try {
             storeService.delete(id);
+        } catch (StoreNotFoundException e) {
+            throw new BaseException(e.getResponseCode());
+        } catch (Exception e) {
+            throw new BaseException(ResponseCode.INTERNAL_ERROR);
+        }
+    }
+
+    @PostMapping("/memo/{id}")
+    public void postStoreMemo(
+            @PathVariable Long id, @RequestBody StoreMemoCreateDto storeMemoCreateDto) {
+        try {
+            storeService.updateMemo(id, storeMemoCreateDto);
         } catch (StoreNotFoundException e) {
             throw new BaseException(e.getResponseCode());
         } catch (Exception e) {

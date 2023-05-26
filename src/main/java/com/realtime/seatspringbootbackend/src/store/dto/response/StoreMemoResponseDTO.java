@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class StoreMemoResponseDto {
+public class StoreMemoResponseDTO {
 
     private String memo;
 }

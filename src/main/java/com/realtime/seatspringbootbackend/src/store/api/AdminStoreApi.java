@@ -118,4 +118,17 @@ public class AdminStoreApi {
             throw new BaseException(ResponseCode.INTERNAL_ERROR);
         }
     }
+
+    @DeleteMapping("/memo/{id}")
+    public void deleteStoreMemo(@PathVariable Long id) {
+        try {
+            storeService.deleteMemo(id);
+        } catch (StoreNotFoundException e) {
+            throw new BaseException(e.getResponseCode());
+        } catch (StoreInactiveException e) {
+            throw new BaseException(e.getResponseCode());
+        } catch (Exception e) {
+            throw new BaseException(ResponseCode.INTERNAL_ERROR);
+        }
+    }
 }

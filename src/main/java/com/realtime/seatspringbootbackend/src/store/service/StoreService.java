@@ -97,4 +97,16 @@ public class StoreService {
             throw new StoreInactiveException(ResponseCode.STORE_INACTIVE);
         storeEntity.setMemo(storeMemoRequestDto.getMemo());
     }
+
+    @Transactional
+    public void deleteMemo(Long id) throws Exception {
+        StoreEntity storeEntity =
+                storeRepository
+                        .findById(id)
+                        .orElseThrow(
+                                () -> new StoreNotFoundException(ResponseCode.STORE_NOT_FOUND));
+        if (storeEntity.getState() == BaseEntity.State.INACTIVE)
+            throw new StoreInactiveException(ResponseCode.STORE_INACTIVE);
+        storeEntity.setMemo(null);
+    }
 }

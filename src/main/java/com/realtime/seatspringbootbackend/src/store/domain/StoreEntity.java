@@ -28,6 +28,9 @@ public class StoreEntity extends BaseEntity {
     @Column(name = "location", nullable = false)
     private String location;
 
+    @Column(name = "main_image", nullable = true)
+    private String mainImage;
+
     @Column(name = "total_floor", nullable = false)
     private int totalFloor;
 

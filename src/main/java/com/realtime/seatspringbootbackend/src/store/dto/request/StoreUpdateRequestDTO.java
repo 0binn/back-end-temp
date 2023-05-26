@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Getter
-public class StoreUpdateRequestDto {
+public class StoreUpdateRequestDTO {
     @NotBlank(message = "가게 이름을 입력해주세요.")
     private String name;
 

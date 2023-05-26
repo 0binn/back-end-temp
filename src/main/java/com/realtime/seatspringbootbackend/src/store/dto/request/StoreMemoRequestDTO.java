@@ -5,6 +5,6 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Getter
-public class StoreMemoRequestDto {
+public class StoreMemoRequestDTO {
     private String memo;
 }

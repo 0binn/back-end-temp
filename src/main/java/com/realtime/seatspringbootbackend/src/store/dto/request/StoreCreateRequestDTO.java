@@ -10,7 +10,7 @@ import lombok.*;
 
 @NoArgsConstructor
 @Getter
-public class StoreCreateRequestDto {
+public class StoreCreateRequestDTO {
 
     @NotBlank(message = "가게 이름을 입력해주세요.")
     private String name;

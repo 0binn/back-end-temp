@@ -6,9 +6,13 @@ import com.realtime.seatspringbootbackend.src.store.domain.StoreEntity;
 import com.realtime.seatspringbootbackend.src.store.dto.request.StoreCreateRequestDto;
 import com.realtime.seatspringbootbackend.src.store.dto.request.StoreMemoCreateDto;
 import com.realtime.seatspringbootbackend.src.store.dto.request.StoreUpdateRequestDto;
+import com.realtime.seatspringbootbackend.src.store.dto.response.StoreMemoResponseDto;
+import com.realtime.seatspringbootbackend.src.store.exception.StoreInactiveException;
 import com.realtime.seatspringbootbackend.src.store.exception.StoreNotFoundException;
 import com.realtime.seatspringbootbackend.src.store.service.StoreService;
+
 import javax.validation.Valid;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -29,6 +33,8 @@ public class AdminStoreApi {
             StoreEntity storeEntity = storeService.findById(id);
             return new ResponseEntity<>(storeEntity, HttpStatus.OK); // TODO dto 반환으로 바꾸기
         } catch (StoreNotFoundException e) {
+            throw new BaseException(e.getResponseCode());
+        } catch (StoreInactiveException e) {
             throw new BaseException(e.getResponseCode());
         } catch (Exception e) {
             throw new BaseException(ResponseCode.INTERNAL_ERROR);
@@ -52,6 +58,8 @@ public class AdminStoreApi {
             storeService.update(id, storeUpdateRequestDto);
         } catch (StoreNotFoundException e) {
             throw new BaseException(e.getResponseCode());
+        } catch (StoreInactiveException e) {
+            throw new BaseException(e.getResponseCode());
         } catch (Exception e) {
             throw new BaseException(ResponseCode.INTERNAL_ERROR);
         }
@@ -62,6 +70,22 @@ public class AdminStoreApi {
         try {
             storeService.delete(id);
         } catch (StoreNotFoundException e) {
+            throw new BaseException(e.getResponseCode());
+        } catch (StoreInactiveException e) {
+            throw new BaseException(e.getResponseCode());
+        } catch (Exception e) {
+            throw new BaseException(ResponseCode.INTERNAL_ERROR);
+        }
+    }
+
+    @GetMapping("/memo/{id}")
+    public ResponseEntity<StoreMemoResponseDto> getStoreMemo(@PathVariable Long id) {
+        try {
+            StoreEntity storeEntity = storeService.findById(id);
+            return new ResponseEntity<>(new StoreMemoResponseDto(storeEntity.getMemo()), HttpStatus.OK);
+        } catch (StoreNotFoundException e) {
+            throw new BaseException(e.getResponseCode());
+        } catch (StoreInactiveException e) {
             throw new BaseException(e.getResponseCode());
         } catch (Exception e) {
             throw new BaseException(ResponseCode.INTERNAL_ERROR);
@@ -74,6 +98,8 @@ public class AdminStoreApi {
         try {
             storeService.updateMemo(id, storeMemoCreateDto);
         } catch (StoreNotFoundException e) {
+            throw new BaseException(e.getResponseCode());
+        } catch (StoreInactiveException e) {
             throw new BaseException(e.getResponseCode());
         } catch (Exception e) {
             throw new BaseException(ResponseCode.INTERNAL_ERROR);

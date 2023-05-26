@@ -20,7 +20,8 @@ public enum ResponseCode {
     INTERNAL_ERROR(INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR", "서버와의 연결에 실패하였습니다."),
 
     /** store error code */
-    STORE_NOT_FOUND(NOT_FOUND, "STORE_404_001", "가게를 찾을 수 없습니다.");
+    STORE_NOT_FOUND(NOT_FOUND, "STORE_404_001", "가게를 찾을 수 없습니다."),
+    STORE_INACTIVE(BAD_REQUEST, "STORE_400_001", "삭제된 가게입니다.");
 
     private final HttpStatus status;
     private final String code;

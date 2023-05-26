@@ -4,15 +4,13 @@ import com.realtime.seatspringbootbackend.common.code.ResponseCode;
 import com.realtime.seatspringbootbackend.common.exceptions.BaseException;
 import com.realtime.seatspringbootbackend.src.store.domain.StoreEntity;
 import com.realtime.seatspringbootbackend.src.store.dto.request.StoreCreateRequestDto;
-import com.realtime.seatspringbootbackend.src.store.dto.request.StoreMemoCreateDto;
+import com.realtime.seatspringbootbackend.src.store.dto.request.StoreMemoRequestDto;
 import com.realtime.seatspringbootbackend.src.store.dto.request.StoreUpdateRequestDto;
 import com.realtime.seatspringbootbackend.src.store.dto.response.StoreMemoResponseDto;
 import com.realtime.seatspringbootbackend.src.store.exception.StoreInactiveException;
 import com.realtime.seatspringbootbackend.src.store.exception.StoreNotFoundException;
 import com.realtime.seatspringbootbackend.src.store.service.StoreService;
-
 import javax.validation.Valid;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -82,7 +80,8 @@ public class AdminStoreApi {
     public ResponseEntity<StoreMemoResponseDto> getStoreMemo(@PathVariable Long id) {
         try {
             StoreEntity storeEntity = storeService.findById(id);
-            return new ResponseEntity<>(new StoreMemoResponseDto(storeEntity.getMemo()), HttpStatus.OK);
+            return new ResponseEntity<>(
+                    new StoreMemoResponseDto(storeEntity.getMemo()), HttpStatus.OK);
         } catch (StoreNotFoundException e) {
             throw new BaseException(e.getResponseCode());
         } catch (StoreInactiveException e) {
@@ -94,9 +93,23 @@ public class AdminStoreApi {
 
     @PostMapping("/memo/{id}")
     public void postStoreMemo(
-            @PathVariable Long id, @RequestBody StoreMemoCreateDto storeMemoCreateDto) {
+            @PathVariable Long id, @RequestBody StoreMemoRequestDto storeMemoRequestDto) {
         try {
-            storeService.updateMemo(id, storeMemoCreateDto);
+            storeService.updateMemo(id, storeMemoRequestDto);
+        } catch (StoreNotFoundException e) {
+            throw new BaseException(e.getResponseCode());
+        } catch (StoreInactiveException e) {
+            throw new BaseException(e.getResponseCode());
+        } catch (Exception e) {
+            throw new BaseException(ResponseCode.INTERNAL_ERROR);
+        }
+    }
+
+    @PatchMapping("/memo/{id}")
+    public void updateMemo(
+            @PathVariable Long id, @RequestBody StoreMemoRequestDto storeMemoRequestDto) {
+        try {
+            storeService.updateMemo(id, storeMemoRequestDto);
         } catch (StoreNotFoundException e) {
             throw new BaseException(e.getResponseCode());
         } catch (StoreInactiveException e) {

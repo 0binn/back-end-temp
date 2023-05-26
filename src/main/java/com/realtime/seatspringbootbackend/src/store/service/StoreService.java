@@ -5,14 +5,12 @@ import com.realtime.seatspringbootbackend.common.entity.BaseEntity;
 import com.realtime.seatspringbootbackend.common.utils.EnumUtils;
 import com.realtime.seatspringbootbackend.src.store.domain.StoreEntity;
 import com.realtime.seatspringbootbackend.src.store.dto.request.StoreCreateRequestDto;
-import com.realtime.seatspringbootbackend.src.store.dto.request.StoreMemoCreateDto;
+import com.realtime.seatspringbootbackend.src.store.dto.request.StoreMemoRequestDto;
 import com.realtime.seatspringbootbackend.src.store.dto.request.StoreUpdateRequestDto;
 import com.realtime.seatspringbootbackend.src.store.exception.StoreInactiveException;
 import com.realtime.seatspringbootbackend.src.store.exception.StoreNotFoundException;
 import com.realtime.seatspringbootbackend.src.store.repository.StoreRepository;
-
 import javax.transaction.Transactional;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,9 +21,11 @@ public class StoreService {
     private final StoreRepository storeRepository;
 
     public StoreEntity findById(Long id) throws Exception {
-        StoreEntity storeEntity = storeRepository
-                .findById(id)
-                .orElseThrow(() -> new StoreNotFoundException(ResponseCode.STORE_NOT_FOUND));
+        StoreEntity storeEntity =
+                storeRepository
+                        .findById(id)
+                        .orElseThrow(
+                                () -> new StoreNotFoundException(ResponseCode.STORE_NOT_FOUND));
         if (storeEntity.getState() == BaseEntity.State.INACTIVE)
             throw new StoreInactiveException(ResponseCode.STORE_INACTIVE);
         return storeEntity;
@@ -50,8 +50,7 @@ public class StoreService {
     }
 
     @Transactional
-    public void update(Long id, StoreUpdateRequestDto storeUpdateRequestDto)
-            throws Exception {
+    public void update(Long id, StoreUpdateRequestDto storeUpdateRequestDto) throws Exception {
         StoreEntity storeEntity =
                 storeRepository
                         .findById(id)
@@ -88,8 +87,7 @@ public class StoreService {
     }
 
     @Transactional
-    public void updateMemo(Long id, StoreMemoCreateDto storeMemoCreateDto)
-            throws Exception {
+    public void updateMemo(Long id, StoreMemoRequestDto storeMemoRequestDto) throws Exception {
         StoreEntity storeEntity =
                 storeRepository
                         .findById(id)
@@ -97,6 +95,6 @@ public class StoreService {
                                 () -> new StoreNotFoundException(ResponseCode.STORE_NOT_FOUND));
         if (storeEntity.getState() == BaseEntity.State.INACTIVE)
             throw new StoreInactiveException(ResponseCode.STORE_INACTIVE);
-        storeEntity.setMemo(storeMemoCreateDto.getMemo());
+        storeEntity.setMemo(storeMemoRequestDto.getMemo());
     }
 }

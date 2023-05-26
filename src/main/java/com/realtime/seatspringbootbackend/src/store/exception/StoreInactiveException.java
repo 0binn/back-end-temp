@@ -4,7 +4,7 @@ import com.realtime.seatspringbootbackend.common.code.ResponseCode;
 import lombok.Getter;
 
 @Getter
-public class StoreInactiveException extends Exception{
+public class StoreInactiveException extends Exception {
     private final ResponseCode responseCode;
 
     public StoreInactiveException(ResponseCode responseCode) {

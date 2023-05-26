@@ -13,20 +13,18 @@ import lombok.*;
 @Entity
 @Table(
         name = "user",
-        uniqueConstraints = {@UniqueConstraint(columnNames = {"loginId", "state"})})
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"email", "state"})})
 public class User extends BaseEntity {
     @Id
     @Column(nullable = false, updatable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "아이디가 입력되지 않았습니다.")
-    private String loginId;
+    @NotBlank(message = "이메일이 입력되지 않았습니다.")
+    private String email;
 
     @NotBlank(message = "비밀번호가 입력되지 않았습니다.")
-    private String loginPw;
-
-    @Nullable private String email;
+    private String password;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -53,9 +51,8 @@ public class User extends BaseEntity {
 
     @Builder
     public User(
-            String loginId,
-            String loginPw,
             String email,
+            String password,
             UserRole role,
             String employerIdNumber,
             int age,
@@ -63,9 +60,8 @@ public class User extends BaseEntity {
             UserSex sex,
             Boolean consentToMarketing,
             Boolean consentToTermsOfUser) {
-        this.loginId = loginId;
-        this.loginPw = loginPw;
         this.email = email;
+        this.password = password;
         this.role = role;
         this.employerIdNumber = employerIdNumber;
         this.age = age;

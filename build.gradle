@@ -21,13 +21,15 @@ repositories {
 
 dependencies {
 	implementation 'org.jetbrains:annotations:23.0.0'
-	testImplementation 'org.springframework.security:spring-security-test'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+//    testImplementation 'org.springframework.security:spring-security-test'
 
 	// Spring Boot Starter
 	testImplementation ('org.springframework.boot:spring-boot-starter-test')
 
 	// Security
 //	implementation 'org.springframework.boot:spring-boot-starter-security' // 401error 조사
+//	implementation ('org.springframework.security:spring-security-crypto:5.7.8')
 
 	// Lombok
 	implementation ('org.projectlombok:lombok')

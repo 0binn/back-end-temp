@@ -1,6 +1,6 @@
 package com.realtime.seatspringbootbackend.common.annotation;
 
-import com.realtime.seatspringbootbackend.common.annotation.validator.LoginIdValidator;
+import com.realtime.seatspringbootbackend.common.annotation.validator.EmailValidator;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -9,7 +9,9 @@ import javax.validation.Constraint;
 
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = LoginIdValidator.class)
-public @interface LoginId {
+@Constraint(validatedBy = EmailValidator.class)
+public @interface Email {
     String message() default "";
+    Class[] groups() default {};
+    Class[] payload() default {};
 }

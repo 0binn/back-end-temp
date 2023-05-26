@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ValidateNicknameReq {
-    @Nickname(message = "")
+    @Nickname(message = "닉네임은 4~12자의 영문(대,소문자 구분)과 숫자만 허용합니다")
     private String nickname;
 }

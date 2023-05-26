@@ -1,15 +1,16 @@
 package com.realtime.seatspringbootbackend.common.annotation.validator;
 
-import com.realtime.seatspringbootbackend.common.annotation.Nickname;
+import com.realtime.seatspringbootbackend.common.annotation.Password;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class NicknameValidator implements ConstraintValidator<Nickname, String> {
+public class PasswordValidator implements ConstraintValidator<Password, String> {
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        if (value == null) {
+        if(value == null) {
             return false;
         }
-        return value.matches("^[A-Za-z0-9ㄱ-ㅎ가-힣]{2,10}$");
+        return value.matches("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$");
     }
 }

@@ -13,6 +13,11 @@ public enum ResponseCode {
     /** 200 : 요청 성공 */
     SUCCESS(OK, "OK", "요청에 성공하였습니다."),
 
+    /**
+     * User
+     */
+    SIGN_IN_FAIL(BAD_REQUEST, "USER_400_001", "로그인에 실패했습니다."),
+
     /** 400 : Request, Response 오류 */
     INVALID_FIELD_VALUE(BAD_REQUEST, "BAD_REQUEST", "필드 값이 올바르지 않습니다."),
 
@@ -21,6 +26,8 @@ public enum ResponseCode {
 
     /** store error code */
     STORE_NOT_FOUND(NOT_FOUND, "STORE_404_001", "가게를 찾을 수 없습니다.");
+
+
 
     private final HttpStatus status;
     private final String code;

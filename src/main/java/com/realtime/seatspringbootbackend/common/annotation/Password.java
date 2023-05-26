@@ -1,16 +1,17 @@
 package com.realtime.seatspringbootbackend.common.annotation;
 
-import com.realtime.seatspringbootbackend.common.annotation.validator.NicknameValidator;
+import com.realtime.seatspringbootbackend.common.annotation.validator.PasswordValidator;
+
+import javax.validation.Constraint;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import javax.validation.Constraint;
 
-@Target({ElementType.FIELD})
+@Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = NicknameValidator.class)
-public @interface Nickname {
+@Constraint(validatedBy = PasswordValidator.class)
+public @interface Password {
     String message() default "";
     Class[] groups() default {};
     Class[] payload() default {};

@@ -10,7 +10,9 @@ import com.realtime.seatspringbootbackend.src.store.dto.request.StoreUpdateReque
 import com.realtime.seatspringbootbackend.src.store.exception.StoreInactiveException;
 import com.realtime.seatspringbootbackend.src.store.exception.StoreNotFoundException;
 import com.realtime.seatspringbootbackend.src.store.repository.StoreRepository;
+
 import javax.transaction.Transactional;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +33,7 @@ public class AdminStoreService {
         return storeEntity;
     }
 
+    @Transactional
     public void save(StoreCreateRequestDTO storeCreateRequestDto) {
         StoreEntity storeEntity = new StoreEntity();
         storeEntity.setName(storeCreateRequestDto.getName());
@@ -47,6 +50,7 @@ public class AdminStoreService {
         storeEntity.setSunBusinessHours(storeCreateRequestDto.getSunBusinessHours());
         storeEntity.setBreakTime(storeCreateRequestDto.getBreakTime());
         storeEntity.setUseTimeLimit(storeCreateRequestDto.getUseTimeLimit());
+        storeRepository.save(storeEntity);
     }
 
     @Transactional

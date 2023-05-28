@@ -5,10 +5,9 @@ import com.realtime.seatspringbootbackend.src.store.domain.StoreEntity;
 import com.realtime.seatspringbootbackend.src.store.dto.StoreMapper;
 import com.realtime.seatspringbootbackend.src.store.dto.response.StoreResponseDTO;
 import com.realtime.seatspringbootbackend.src.store.repository.StoreRepository;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -20,5 +19,4 @@ public class StoreService {
         List<StoreEntity> storeEntityList = storeRepository.findAllByState(BaseEntity.State.ACTIVE);
         return StoreMapper.toDTOList(storeEntityList);
     }
-
 }

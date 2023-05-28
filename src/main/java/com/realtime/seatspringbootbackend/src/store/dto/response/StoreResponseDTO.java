@@ -1,10 +1,8 @@
 package com.realtime.seatspringbootbackend.src.store.dto.response;
 
-import com.realtime.seatspringbootbackend.src.store.domain.KindEnum;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
-import javax.persistence.*;
 
 @Setter
 @Getter

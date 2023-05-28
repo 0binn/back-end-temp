@@ -2,7 +2,6 @@ package com.realtime.seatspringbootbackend.src.store.dto;
 
 import com.realtime.seatspringbootbackend.src.store.domain.StoreEntity;
 import com.realtime.seatspringbootbackend.src.store.dto.response.StoreResponseDTO;
-
 import java.util.ArrayList;
 import java.util.List;
 

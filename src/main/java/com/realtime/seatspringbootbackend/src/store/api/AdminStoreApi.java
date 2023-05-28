@@ -10,9 +10,8 @@ import com.realtime.seatspringbootbackend.src.store.dto.response.StoreMemoRespon
 import com.realtime.seatspringbootbackend.src.store.exception.StoreInactiveException;
 import com.realtime.seatspringbootbackend.src.store.exception.StoreNotFoundException;
 import com.realtime.seatspringbootbackend.src.store.service.AdminStoreService;
-import javax.validation.Valid;
-
 import io.swagger.v3.oas.annotations.Operation;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

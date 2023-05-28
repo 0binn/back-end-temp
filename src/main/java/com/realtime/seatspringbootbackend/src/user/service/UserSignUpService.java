@@ -11,7 +11,6 @@ import com.realtime.seatspringbootbackend.src.user.dto.response.ValidateUserInfo
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-//import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Transactional
 @RequiredArgsConstructor
@@ -19,15 +18,14 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserSignUpService {
     private final UserRepository userRepository;
     private final UserAdaptor userAdaptor;
-//    private final PasswordEncoder passwordEncoder;
+    //    private final PasswordEncoder passwordEncoder;
     public ValidateUserInformationRes isNicknameDuplicated(String nickname) {
         return new ValidateUserInformationRes(
                 !userRepository.existsByNicknameAndState(nickname, ACTIVE));
     }
 
     public ValidateUserInformationRes isEmailDuplicated(String email) {
-        return new ValidateUserInformationRes(
-                !userRepository.existsByEmailAndState(email, ACTIVE));
+        return new ValidateUserInformationRes(!userRepository.existsByEmailAndState(email, ACTIVE));
     }
 
     public void userSignUp(UserSignUpReq userSignUpReq) {

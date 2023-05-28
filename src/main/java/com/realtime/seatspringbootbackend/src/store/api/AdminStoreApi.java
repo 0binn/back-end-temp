@@ -12,6 +12,8 @@ import com.realtime.seatspringbootbackend.src.store.exception.StoreNotFoundExcep
 import com.realtime.seatspringbootbackend.src.store.service.AdminStoreService;
 import io.swagger.v3.oas.annotations.Operation;
 import javax.validation.Valid;
+
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/v1/admin/store")
 @RequiredArgsConstructor
 @Slf4j
+@Tag(name = "02. [Store - Admin]")
 public class AdminStoreApi {
 
     private final AdminStoreService adminStoreService;

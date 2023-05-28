@@ -122,5 +122,5 @@ spring:
         format_sql: false
   security:
     user:
-      name: user
-      password: seatcheck@1234
+      name: ${LOCAL_SEC_USER}
+      password: ${LOCAL_SEC_PW}

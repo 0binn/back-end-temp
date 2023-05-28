@@ -9,5 +9,6 @@ import lombok.Getter;
 public class UserSignInReq {
     @Email(message = "이메일은 @까지 포함해 올바른 형식을 입력해주세요.")
     private String email;
+
     private String password;
 }

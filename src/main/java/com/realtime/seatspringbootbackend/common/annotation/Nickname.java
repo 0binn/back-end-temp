@@ -12,6 +12,8 @@ import javax.validation.Constraint;
 @Constraint(validatedBy = NicknameValidator.class)
 public @interface Nickname {
     String message() default "";
+
     Class[] groups() default {};
+
     Class[] payload() default {};
 }

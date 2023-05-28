@@ -13,9 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserSignInService {
     private final UserRepository userRepository;
 
-    public void userSignIn(UserSignInReq userSignInReq) {
-
-    }
+    public void userSignIn(UserSignInReq userSignInReq) {}
 
     public boolean isExistEmail(String email) {
         return userRepository.existsByEmailAndState(email, BaseEntity.State.ACTIVE);

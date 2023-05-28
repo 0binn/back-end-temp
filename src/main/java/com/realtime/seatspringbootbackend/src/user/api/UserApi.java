@@ -53,7 +53,7 @@ public class UserApi {
     @Operation(summary = "유저 로그인")
     @PostMapping("/sign-in")
     public void userSignIn(@Valid @RequestBody UserSignInReq userSignInReq) {
-        if(!userSignInService.isExistEmail(userSignInReq.getEmail())) {
+        if (!userSignInService.isExistEmail(userSignInReq.getEmail())) {
             throw new BaseException(ResponseCode.SIGN_IN_FAIL);
         }
 

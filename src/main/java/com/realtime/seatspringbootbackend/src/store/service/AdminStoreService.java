@@ -3,6 +3,7 @@ package com.realtime.seatspringbootbackend.src.store.service;
 import com.realtime.seatspringbootbackend.common.code.ResponseCode;
 import com.realtime.seatspringbootbackend.common.entity.BaseEntity;
 import com.realtime.seatspringbootbackend.common.utils.EnumUtils;
+import com.realtime.seatspringbootbackend.src.store.domain.CategoryEnum;
 import com.realtime.seatspringbootbackend.src.store.domain.StoreEntity;
 import com.realtime.seatspringbootbackend.src.store.dto.request.StoreCreateRequestDTO;
 import com.realtime.seatspringbootbackend.src.store.dto.request.StoreMemoRequestDTO;
@@ -38,7 +39,9 @@ public class AdminStoreService {
         storeEntity.setIntroduction(storeCreateRequestDto.getIntroduction());
         storeEntity.setLocation(storeCreateRequestDto.getLocation());
         storeEntity.setTotalFloor(storeEntity.getTotalFloor());
-        storeEntity.setCategory(storeCreateRequestDto.getCategoryEnum());
+        storeEntity.setCategory(
+                EnumUtils.getEnumFromString(
+                        storeCreateRequestDto.getCategory(), CategoryEnum.class));
         storeEntity.setDayOff(EnumUtils.getEnumListAsString(storeCreateRequestDto.getDayOff()));
         storeEntity.setMonBusinessHours(storeCreateRequestDto.getMonBusinessHours());
         storeEntity.setTueBusinessHours(storeCreateRequestDto.getTueBusinessHours());

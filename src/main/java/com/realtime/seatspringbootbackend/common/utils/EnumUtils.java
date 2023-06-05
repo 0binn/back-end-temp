@@ -16,4 +16,8 @@ public class EnumUtils {
                 .map(name -> Enum.valueOf(enumClass, name))
                 .collect(Collectors.toList());
     }
+
+    public static <T extends Enum<T>> T getEnumFromString(String enumString, Class<T> enumClass) {
+        return Enum.valueOf(enumClass, enumString);
+    }
 }

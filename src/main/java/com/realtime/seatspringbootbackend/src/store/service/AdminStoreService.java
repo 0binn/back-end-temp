@@ -10,9 +10,7 @@ import com.realtime.seatspringbootbackend.src.store.dto.request.StoreUpdateReque
 import com.realtime.seatspringbootbackend.src.store.exception.StoreInactiveException;
 import com.realtime.seatspringbootbackend.src.store.exception.StoreNotFoundException;
 import com.realtime.seatspringbootbackend.src.store.repository.StoreRepository;
-
 import javax.transaction.Transactional;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -40,7 +38,7 @@ public class AdminStoreService {
         storeEntity.setIntroduction(storeCreateRequestDto.getIntroduction());
         storeEntity.setLocation(storeCreateRequestDto.getLocation());
         storeEntity.setTotalFloor(storeEntity.getTotalFloor());
-        storeEntity.setKind(storeCreateRequestDto.getKind());
+        storeEntity.setCategory(storeCreateRequestDto.getCategoryEnum());
         storeEntity.setDayOff(EnumUtils.getEnumListAsString(storeCreateRequestDto.getDayOff()));
         storeEntity.setMonBusinessHours(storeCreateRequestDto.getMonBusinessHours());
         storeEntity.setTueBusinessHours(storeCreateRequestDto.getTueBusinessHours());
@@ -66,7 +64,7 @@ public class AdminStoreService {
         storeEntity.setIntroduction(storeUpdateRequestDto.getIntroduction());
         storeEntity.setLocation(storeUpdateRequestDto.getLocation());
         storeEntity.setTotalFloor(storeEntity.getTotalFloor());
-        storeEntity.setKind(storeUpdateRequestDto.getKind());
+        storeEntity.setCategory(storeUpdateRequestDto.getCategoryEnum());
         storeEntity.setDayOff(EnumUtils.getEnumListAsString(storeUpdateRequestDto.getDayOff()));
         storeEntity.setMonBusinessHours(storeUpdateRequestDto.getMonBusinessHours());
         storeEntity.setTueBusinessHours(storeUpdateRequestDto.getTueBusinessHours());

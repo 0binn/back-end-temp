@@ -5,12 +5,12 @@ import com.realtime.seatspringbootbackend.common.exceptions.BaseException;
 import com.realtime.seatspringbootbackend.src.store.dto.response.StoreListResponseDTO;
 import com.realtime.seatspringbootbackend.src.store.dto.response.StoreResponseDTO;
 import com.realtime.seatspringbootbackend.src.store.exception.StoreCategoryNotFoundException;
-import com.realtime.seatspringbootbackend.src.store.exception.StoreNotFoundException;
 import com.realtime.seatspringbootbackend.src.store.service.StoreService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
-
 import java.util.List;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -29,9 +29,16 @@ public class StoreApi {
 
     private final StoreService storeService;
 
+    @Operation(summary = "리스트 페이지에서 가게 정보 받아오기")
     @GetMapping("/list")
     public ResponseEntity<StoreListResponseDTO> getStores(
-            @RequestParam(defaultValue = "NONE") String category) {
+            @Parameter(
+                            description = "가게의 카테고리(NONE - 생략 가능, 전체 & 나머지 - 특정 카테고리)",
+                            name = "category",
+                            required = true,
+                            schema = @Schema(allowableValues = {"NONE", "RESTAURANT", "CAFE", "SPACE"}))
+                    @RequestParam(defaultValue = "NONE")
+                    String category) {
         try {
             List<StoreResponseDTO> storeResponseDTOList = storeService.findAll(category);
             return new ResponseEntity<>(

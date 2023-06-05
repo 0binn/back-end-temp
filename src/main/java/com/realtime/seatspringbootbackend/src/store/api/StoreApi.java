@@ -36,7 +36,14 @@ public class StoreApi {
                             description = "가게의 카테고리(NONE - 생략 가능, 전체 & 나머지 - 특정 카테고리)",
                             name = "category",
                             required = true,
-                            schema = @Schema(allowableValues = {"NONE", "RESTAURANT", "CAFE", "SPACE"}))
+                            schema =
+                                    @Schema(
+                                            allowableValues = {
+                                                "NONE",
+                                                "RESTAURANT",
+                                                "CAFE",
+                                                "SPACE"
+                                            }))
                     @RequestParam(defaultValue = "NONE")
                     String category) {
         try {
@@ -46,6 +53,22 @@ public class StoreApi {
                     HttpStatus.OK);
         } catch (StoreCategoryNotFoundException e) {
             throw new BaseException(e.getResponseCode());
+        } catch (Exception e) {
+            throw new BaseException(ResponseCode.INTERNAL_ERROR);
+        }
+    }
+
+    @Operation(summary = "가게 이름으로 검색하기")
+    @GetMapping("/list/name")
+    public ResponseEntity<StoreListResponseDTO> getStoresByName(
+            @Parameter(description = "가게의 이름을 포함하는 결과 검색", name = "name", required = true)
+                    @RequestParam
+                    String name) {
+        try {
+            List<StoreResponseDTO> storeResponseDTOList = storeService.findAllByName(name);
+            return new ResponseEntity<>(
+                    new StoreListResponseDTO(storeResponseDTOList.size(), storeResponseDTOList),
+                    HttpStatus.OK);
         } catch (Exception e) {
             throw new BaseException(ResponseCode.INTERNAL_ERROR);
         }

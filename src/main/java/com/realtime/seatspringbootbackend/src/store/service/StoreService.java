@@ -8,11 +8,8 @@ import com.realtime.seatspringbootbackend.src.store.domain.StoreEntity;
 import com.realtime.seatspringbootbackend.src.store.dto.StoreMapper;
 import com.realtime.seatspringbootbackend.src.store.dto.response.StoreResponseDTO;
 import com.realtime.seatspringbootbackend.src.store.exception.StoreCategoryNotFoundException;
-import com.realtime.seatspringbootbackend.src.store.exception.StoreNotFoundException;
 import com.realtime.seatspringbootbackend.src.store.repository.StoreRepository;
-
 import java.util.List;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -39,5 +36,10 @@ public class StoreService {
                 throw new StoreCategoryNotFoundException(ResponseCode.STORE_CATEGORY_NOT_FOUND);
             }
         }
+    }
+
+    public List<StoreResponseDTO> findAllByName(String name) {
+        List<StoreEntity> storeEntityList = storeRepository.findByNameLike(name);
+        return StoreMapper.toDTOList(storeEntityList);
     }
 }

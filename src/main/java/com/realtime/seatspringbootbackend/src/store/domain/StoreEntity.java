@@ -35,8 +35,8 @@ public class StoreEntity extends BaseEntity {
     private int totalFloor;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "kind", nullable = false)
-    private KindEnum kind;
+    @Column(name = "category", nullable = false)
+    private CategoryEnum category;
 
     @Column(name = "day_off", nullable = true)
     private String dayOff;

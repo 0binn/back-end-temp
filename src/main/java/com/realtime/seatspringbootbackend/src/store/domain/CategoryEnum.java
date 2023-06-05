@@ -1,6 +1,7 @@
 package com.realtime.seatspringbootbackend.src.store.domain;
 
-public enum KindEnum {
+public enum CategoryEnum {
     CAFE,
-    RESTAURANT
+    RESTAURANT,
+    NONE
 }

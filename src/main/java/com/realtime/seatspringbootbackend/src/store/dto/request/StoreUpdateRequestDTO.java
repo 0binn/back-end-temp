@@ -1,7 +1,7 @@
 package com.realtime.seatspringbootbackend.src.store.dto.request;
 
+import com.realtime.seatspringbootbackend.src.store.domain.CategoryEnum;
 import com.realtime.seatspringbootbackend.src.store.domain.DayEnum;
-import com.realtime.seatspringbootbackend.src.store.domain.KindEnum;
 import java.util.List;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -25,7 +25,7 @@ public class StoreUpdateRequestDTO {
     private int totalFloor;
 
     @NotNull(message = "가게 종류를 선택해주세요.")
-    private KindEnum kind;
+    private CategoryEnum categoryEnum;
 
     private List<DayEnum> dayOff;
     private String monBusinessHours;

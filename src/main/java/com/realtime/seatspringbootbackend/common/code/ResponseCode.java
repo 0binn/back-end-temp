@@ -25,6 +25,7 @@ public enum ResponseCode {
     /** store error code */
     STORE_NOT_FOUND(NOT_FOUND, "STORE_404_001", "가게를 찾을 수 없습니다."),
     STORE_CATEGORY_NOT_FOUND(NOT_FOUND, "STORE_404_002", "카테고리를 찾을 수 없습니다."),
+    STORE_SORT_FIELD_NOT_FOUND(NOT_FOUND, "STORE_404_003", "정렬 조건을 적용할 수 없습니다."),
     STORE_INACTIVE(BAD_REQUEST, "STORE_400_001", "삭제된 가게입니다.");
 
     private final HttpStatus status;

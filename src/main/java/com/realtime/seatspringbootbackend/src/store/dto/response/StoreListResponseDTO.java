@@ -1,13 +1,16 @@
 package com.realtime.seatspringbootbackend.src.store.dto.response;
 
 import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 
-@AllArgsConstructor
+@Builder
 @Getter
 public class StoreListResponseDTO {
 
-    private int count;
+    private int curCount;
+    private int curPage;
+    private long totalCount;
+    private int totalPage;
     private List<StoreResponseDTO> storeList;
 }

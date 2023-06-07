@@ -8,6 +8,7 @@ import lombok.Setter;
 @Getter
 public class StoreResponseDTO {
 
+    private Long id;
     private String name;
     private String introduction;
     private String location;

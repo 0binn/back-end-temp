@@ -5,20 +5,21 @@ import com.realtime.seatspringbootbackend.common.exceptions.BaseException;
 import com.realtime.seatspringbootbackend.src.store.dto.response.StoreListResponseDTO;
 import com.realtime.seatspringbootbackend.src.store.dto.response.StoreResponseDTO;
 import com.realtime.seatspringbootbackend.src.store.exception.StoreCategoryNotFoundException;
+import com.realtime.seatspringbootbackend.src.store.exception.StoreSortFieldNotFoundException;
 import com.realtime.seatspringbootbackend.src.store.service.StoreService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.Arrays;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/v1/users/stores")
@@ -45,15 +46,30 @@ public class StoreApi {
                                                 "SPACE"
                                             }))
                     @RequestParam(defaultValue = "NONE")
-                    String category) {
+                    String category,
+            @Parameter(
+                            description =
+                                    "page - 1부터 시작, size - 한 페이지에 담을 데이터 수, sort - 정렬 조건, 순서대로 적용",
+                            name = "pageable",
+                            required = true)
+                    Pageable pageable) {
         try {
-            List<StoreResponseDTO> storeResponseDTOList = storeService.findAll(category);
+            Page<StoreResponseDTO> storeResponseDTOList = storeService.findAll(category, pageable);
             return new ResponseEntity<>(
-                    new StoreListResponseDTO(storeResponseDTOList.size(), storeResponseDTOList),
+                    StoreListResponseDTO.builder()
+                            .curCount(storeResponseDTOList.getNumberOfElements())
+                            .curPage(pageable.getPageNumber() + 1)
+                            .totalCount(storeResponseDTOList.getTotalElements())
+                            .totalPage(storeResponseDTOList.getTotalPages())
+                            .storeList(storeResponseDTOList.getContent())
+                            .build(),
                     HttpStatus.OK);
         } catch (StoreCategoryNotFoundException e) {
             throw new BaseException(e.getResponseCode());
+        } catch (StoreSortFieldNotFoundException e) {
+            throw new BaseException(e.getResponseCode());
         } catch (Exception e) {
+            log.info(Arrays.toString(e.getStackTrace()));
             throw new BaseException(ResponseCode.INTERNAL_ERROR);
         }
     }
@@ -67,7 +83,10 @@ public class StoreApi {
         try {
             List<StoreResponseDTO> storeResponseDTOList = storeService.findAllByName(name);
             return new ResponseEntity<>(
-                    new StoreListResponseDTO(storeResponseDTOList.size(), storeResponseDTOList),
+                    StoreListResponseDTO.builder()
+                            .storeList(storeResponseDTOList)
+                            .totalCount(storeResponseDTOList.size())
+                            .build(),
                     HttpStatus.OK);
         } catch (Exception e) {
             throw new BaseException(ResponseCode.INTERNAL_ERROR);

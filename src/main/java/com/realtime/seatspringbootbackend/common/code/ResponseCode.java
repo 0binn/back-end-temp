@@ -26,7 +26,11 @@ public enum ResponseCode {
     STORE_NOT_FOUND(NOT_FOUND, "STORE_404_001", "가게를 찾을 수 없습니다."),
     STORE_CATEGORY_NOT_FOUND(NOT_FOUND, "STORE_404_002", "카테고리를 찾을 수 없습니다."),
     STORE_SORT_FIELD_NOT_FOUND(NOT_FOUND, "STORE_404_003", "정렬 조건을 적용할 수 없습니다."),
-    STORE_INACTIVE(BAD_REQUEST, "STORE_400_001", "삭제된 가게입니다.");
+    STORE_INACTIVE(BAD_REQUEST, "STORE_400_001", "삭제된 가게입니다."),
+
+    /** sign up validation error code */
+    SIGN_UP_EMAIL_CHECK_FAIL(BAD_REQUEST, "BAD_REQUEST", "이미 사용중인 이메일입니다."),
+    SIGN_UP_PASSWORD_CHECK_FAIL(BAD_REQUEST, "BAD_REQUEST", "비밀번호를 다시 입력해 주세요.");
 
     private final HttpStatus status;
     private final String code;

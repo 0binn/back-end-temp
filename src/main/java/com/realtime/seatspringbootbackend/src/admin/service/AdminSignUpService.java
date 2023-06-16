@@ -22,12 +22,11 @@ public class AdminSignUpService {
     public void save(User user) {adminRepository.save(user);}
     public void save(AdminInfoEntity adminInfoEntity){adminInfoRepository.save(adminInfoEntity);}
 
-    public void checkValidation(AdminSignUpRequestDTO adminSignUpRequestDTO) {
-        if(adminRepository.findByEmail(adminSignUpRequestDTO.getEmail()).isPresent()) {
-            throw new BaseException(ResponseCode.SIGN_UP_EMAIL_CHECK_FAIL);
-        }
+    public void checkPassword(AdminSignUpRequestDTO adminSignUpRequestDTO) {
+
         if(!adminSignUpRequestDTO.getPassword().equals(adminSignUpRequestDTO.getPasswordChecked())) {
             throw new BaseException(ResponseCode.SIGN_UP_PASSWORD_CHECK_FAIL);
         }
     }
+
 }
